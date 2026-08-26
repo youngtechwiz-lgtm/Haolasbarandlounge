@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Haolas Bar & Lounge"
+description = "A premium hospitality website for Haolas Bar & Lounge in Ibeju-Lekki, Lagos, with a dynamic Supabase-ready menu, events, gallery, contact enquiries, QR menu destination, and protected admin CMS foundation."
+version = "1.0.0"
+id = "artifacts/haolas-bar-lounge"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18475
+
+[services.development]
+run = "pnpm --filter @workspace/haolas-bar-lounge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/haolas-bar-lounge", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/haolas-bar-lounge/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18475"
+BASE_PATH = "/"
